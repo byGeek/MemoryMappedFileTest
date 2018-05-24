@@ -17,9 +17,9 @@ namespace Test2
 
 
             Mutex mutex = Mutex.OpenExisting("mymutex");
-            mutex.WaitOne();
+            mutex.WaitOne();  //require mutex to go on
 
-            viewAccessor.Write(1, 1);
+            viewAccessor.Write(1, 1);  //set the second byte to 1
 
             Console.WriteLine("test2 started");
 

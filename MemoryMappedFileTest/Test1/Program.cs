@@ -20,6 +20,7 @@ namespace Test1
             MemoryMappedFile mmf = MemoryMappedFile.CreateFromFile(filePath, System.IO.FileMode.Create, "mmftest", 1024 * 1024 * 20, MemoryMappedFileAccess.ReadWrite);
             MemoryMappedViewAccessor viewAccessor = mmf.CreateViewAccessor(0, 0, MemoryMappedFileAccess.ReadWrite);
 
+            //use Mutex to sync between process, in this case, Test1 and Test2
             bool mutexCreated = false;
             Mutex mutex = new Mutex(true, "mymutex", out mutexCreated);
 
@@ -36,7 +37,7 @@ namespace Test1
             var flag = 0;
             while(true)
             {
-                flag =  viewAccessor.ReadByte(1);
+                flag =  viewAccessor.ReadByte(1);  //read the second byte of mmf, which will be set to 1 when Test2 started.
                 if(flag == 1)
                 {
                     break;
@@ -47,6 +48,7 @@ namespace Test1
                 }
             }
 
+            //dispose
             viewAccessor.Dispose();
             mmf.Dispose();
 
