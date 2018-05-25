@@ -25,6 +25,9 @@ This demo code is very simple. It has two project to simulate two process.
 Test1 project create a mmf from a disk file.  Once started, Test1 will check the second byte which will be set when Test2 started.
 
 
+mmf_vs_normal_io project is a simple test about IO performance. Normally speaking, mmf will have at least two times performance boost compared with normal IO.
+
+
 
 # Notes
 
